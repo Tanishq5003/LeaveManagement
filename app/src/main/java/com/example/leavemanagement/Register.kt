@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -22,6 +23,7 @@ class Register : AppCompatActivity() {
     private lateinit var register: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var sign:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -33,8 +35,8 @@ class Register : AppCompatActivity() {
         regno = findViewById(R.id.inputRegistrationNumber)
         cnfrmpass = findViewById(R.id.inputConfirmPassword)
         auth = FirebaseAuth.getInstance()
-        database =
-            Firebase.database.reference
+        database = Firebase.database.reference
+        sign = findViewById(R.id.textViewSignUp)
 
         register.setOnClickListener {
 
@@ -55,6 +57,11 @@ class Register : AppCompatActivity() {
             }
         }
 
+        sign.setOnClickListener {
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
+
     }
     private fun registerUser(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this){task ->
@@ -62,8 +69,8 @@ class Register : AppCompatActivity() {
                 var txt_name:String = usrnme.text.toString()
                 var reg_no:String = regno.text.toString()
                 Toast.makeText(this , "User Registered Successfully", Toast.LENGTH_SHORT).show()
-                database.child("Name").child(Firebase.auth.currentUser!!.uid).setValue(txt_name)
-                database.child("Registration").child(Firebase.auth.currentUser!!.uid).setValue(reg_no)
+                database.child("Name").child(Firebase.auth.currentUser!!.uid).child(Firebase.auth.currentUser!!.uid).setValue(txt_name)
+                database.child("Registration").child(Firebase.auth.currentUser!!.uid).child(Firebase.auth.currentUser!!.uid).setValue(reg_no)
 
                 var intent = Intent(this , Login::class.java)
                 startActivity(intent)

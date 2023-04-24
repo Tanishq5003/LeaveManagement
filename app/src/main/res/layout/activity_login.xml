@@ -57,7 +57,7 @@
         android:drawableLeft="@drawable/ic_username"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="Registration Number"
+        android:hint="Registered Mail"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
@@ -126,19 +126,4 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnGoogle"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_bg"
-        android:drawableLeft="@drawable/ic_google"
-        android:text="Google"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.178" />
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
