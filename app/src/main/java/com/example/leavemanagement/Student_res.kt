@@ -31,6 +31,8 @@ class Student_res : AppCompatActivity() {
         from = findViewById(R.id.editTextTextPersonName)
         to = findViewById(R.id.editTextTextPersonName2)
         reason = findViewById(R.id.editTextTextPersonName3)
+        val hlfd = findViewById<RadioButton>(R.id.radioButton)
+        val fd = findViewById<RadioButton>(R.id.radioButton2)
 //        database = Firebase.database.reference
         database = FirebaseDatabase.getInstance().getReference("Name")
         database1 = FirebaseDatabase.getInstance().getReference("Registration")
@@ -123,9 +125,23 @@ class Student_res : AppCompatActivity() {
             }
         )
         submit.setOnClickListener {
-            val refresh = Intent(this, MainActivity::class.java)
-            startActivity(refresh)
+            if(hlfd.isChecked&& to.text.toString()!=from.text.toString()){
+                Toast.makeText(this, "Laving date and Arriving date should be same for Day Leave", Toast.LENGTH_SHORT).show()
+            }
+            else{
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("from", from.text.toString())
+            intent.putExtra("to", to.text.toString())
+            intent.putExtra("reason", reason.text.toString())
+            if(hlfd.isChecked){
+                intent.putExtra("day", "Day Leave")
+            }
+            else if (fd.isChecked){
+                intent.putExtra("day", "Night Leave")
+            }
+            startActivity(intent)
             finish()
+        }
         }
 
 
